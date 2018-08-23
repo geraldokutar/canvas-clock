@@ -19,6 +19,7 @@ function drawNumericals() {
       angle = 0,
       numeralWidth = 0;
 
+
   numerals.forEach(function(numeral) {
     angle = Math.PI/6 * (numeral-3);
     numeralWidth = context.measureText(numeral).width;
@@ -27,6 +28,7 @@ function drawNumericals() {
           numeralWidth/2,
       canvas.height/2 + Math.sin(angle)*(HAND_RADIUS) *
           FONT_HEIGHT/3);
+      
   })
 }
 function drawCenter() {
