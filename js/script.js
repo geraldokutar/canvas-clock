@@ -1,5 +1,9 @@
 var canvas = document.getElementById('canvas'),
 context = canvas.getContext('2d'),
+snapshotButton = document.getElementById('snapshotButton'),
+snapshotImageElement = document.getElementById('snapshotImageElement'),
+loop;
+
 FONT_HEIGHT = 15,
 MARGIN = 35,
 HAND_TRUNCATION = canvas.width/25,
@@ -7,6 +11,28 @@ HOUR_HAND_TRUNCATION = canvas.width/10,
 NUMERAL_SPACING = 20,
 RADIUS = canvas.width/2 - MARGIN,
 HAND_RADIUS = RADIUS + NUMERAL_SPACING;
+
+snapshotButton.onclick = function (e) {
+  var dataUrl;
+
+  if (snapshotButton.value === 'Take snapshot'){
+    dataUrl = canvas.toDataURL();
+    clearInterval(loop);
+    snapshotImageElement.src = dataUrl;
+    snapshotImageElement.style.display = 'inline';
+    canvas.style.display = 'none';
+    snapshotButton.value = 'Return to canvas';
+  }
+  else {
+    canvas.style.display = 'inline';
+    snapshotImageElement.style.display = 'none';
+    loop = setInterval(drawClock, 1000);
+    snapshotButton.value = 'Take snapshot';
+
+  }
+}
+context.font = FONT_HEIGHT + 'px Arial';
+loop = setInterval(drawClock, 1000)
 
 function drawCircle() {
 context.beginPath();
@@ -28,7 +54,7 @@ function drawNumericals() {
           numeralWidth/2,
       canvas.height/2 + Math.sin(angle)*(HAND_RADIUS) *
           FONT_HEIGHT/3);
-      
+
   })
 }
 function drawCenter() {
