@@ -42,8 +42,8 @@ context.stroke();
 }
 function drawNumericals() {
   var numerals = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, ],
-      angle = 0,
-      numeralWidth = 0;
+      angle = 1,
+      numeralWidth = 1;
 
 
   numerals.forEach(function(numeral) {
